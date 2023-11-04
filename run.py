@@ -1,10 +1,7 @@
 from API import app
-from API.api import routes
 from _config import constants
 import os
-from langchain.document_loaders import DirectoryLoader
-
-global data
+from API.law_ai_api import routes
 
 app.register_blueprint(routes, url_prefix="")
 
