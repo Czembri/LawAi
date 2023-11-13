@@ -39,6 +39,19 @@ def _get_data():
     return ai
 
 
+## DOCUMENT GENERATOR API ##
+@app.route("/api/v1/document-generator", methods=["POST"])
+def post_document_info():
+    ai_instance = _get_data()
+    data = request.get_json()
+    data_query = data["query"]
+    ai_instance.generate_document(data_query)
+    
+    ## what response should be returned? blob or json????
+    return jsonify({
+        'response': 'Memory cleared'
+    })
+
 
 ### CONSTITUTUION API ###
 

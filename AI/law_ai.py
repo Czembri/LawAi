@@ -24,3 +24,7 @@ class LawAI:
 
     def get_messages(self):
         return self.messages
+    
+
+    def generate_document(self, query):
+        return
