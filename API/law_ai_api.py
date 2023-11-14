@@ -1,5 +1,6 @@
 from flask import Blueprint, request, jsonify
 from AI.constitution import ConstitutionAI
+from AI.document_generator import DocumentGenerator
 from AI.law_ai import LawAI
 from API import app
 
@@ -42,14 +43,13 @@ def _get_data():
 ## DOCUMENT GENERATOR API ##
 @app.route("/api/v1/document-generator", methods=["POST"])
 def post_document_info():
-    ai_instance = _get_data()
+    ai_instance = DocumentGenerator()
     data = request.get_json()
     data_query = data["query"]
-    ai_instance.generate_document(data_query)
+    response = ai_instance.generate_document(data_query)
     
-    ## what response should be returned? blob or json????
     return jsonify({
-        'response': 'Memory cleared'
+        'response': response
     })
 
 
