@@ -1,6 +1,6 @@
 import openai
 import os
-from abc import ABC, abstractmethod
+from abc import ABC
 
 class LawAIAbstract(ABC):
     def __init__(self, messages):
