@@ -1,16 +1,19 @@
+import json
 from flask import Blueprint, request, jsonify
-from flask_jwt_extended import jwt_required
+from API.models.message_dto_model import *
 from AI.law_ai import LawAI
 from API import app
 from shared.auth_decorator import require_secret_header
 
 law_ai = Blueprint('law_ai', __name__)
 
-@app.route("/api/v1/law-ai/load-data", methods=["GET"])
+@app.route("/api/v1/law-ai/load-data", methods=["POST"])
 @require_secret_header
 def law_AI_data():
     global ai_instance
-    ai_instance = _get_data()
+    data = request.get_json()
+    data_body = data["body"]
+    ai_instance = _get_data(data_body)
     return jsonify({
         'message': 'Data loaded successfully'
     })
@@ -39,6 +42,6 @@ def get_messages():
         'response': ai_instance.get_messages()
     })
 
-def _get_data():
-    ai = LawAI()
+def _get_data(messages):
+    ai = LawAI(messages)
     return ai
