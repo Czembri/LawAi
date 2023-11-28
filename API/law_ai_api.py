@@ -1,6 +1,5 @@
 import json
 from flask import Blueprint, request, jsonify
-from API.models.message_dto_model import *
 from AI.law_ai import LawAI
 from API import app
 from shared.auth_decorator import require_secret_header
